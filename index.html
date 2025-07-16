@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Rock Paper Scissors - CSS Only</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #222;
+    color: #eee;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    margin: 0;
+    padding: 2rem;
+  }
+  h1 {
+    margin-bottom: 1rem;
+  }
+  .game {
+    background: #333;
+    border-radius: 10px;
+    padding: 2rem;
+    width: 320px;
+    box-shadow: 0 0 15px #555;
+  }
+  .choices {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 1.5rem;
+  }
+  input[type="radio"] {
+    display: none;
+  }
+  label {
+    cursor: pointer;
+    background: #444;
+    border-radius: 10px;
+    padding: 1rem 1.5rem;
+    user-select: none;
+    transition: background 0.3s ease;
+    width: 80px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #ccc;
+    box-shadow: inset 0 0 5px #000;
+  }
+  label:hover {
+    background: #555;
+  }
+  input[type="radio"]:checked + label {
+    background: #0a84ff;
+    color: white;
+    box-shadow: 0 0 10px #0a84ff;
+  }
+  .result {
+    text-align: center;
+    font-size: 1.2rem;
+    min-height: 2rem;
+    margin-bottom: 1rem;
+  }
+  /* Computer choice simulation */
+  .computer-choice {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #0af;
+  }
+  /* Result messages */
+  .win {
+    color: #4caf50;
+  }
+  .lose {
+    color: #f44336;
+  }
+  .draw {
+    color: #ff9800;
+  }
+
+  /* Logic using CSS only */
+  /* Rock selected */
+  #rock:checked ~ .result-container #result-rock {
+    display: block;
+  }
+  #rock:checked ~ .result-container #result-paper,
+  #rock:checked ~ .result-container #result-scissors {
+    display: none;
+  }
+  /* Paper selected */
+  #paper:checked ~ .result-container #result-paper {
+    display: block;
+  }
+  #paper:checked ~ .result-container #result-rock,
+  #paper:checked ~ .result-container #result-scissors {
+    display: none;
+  }
+  /* Scissors selected */
+  #scissors:checked ~ .result-container #result-scissors {
+    display: block;
+  }
+  #scissors:checked ~ .result-container #result-rock,
+  #scissors:checked ~ .result-container #result-paper {
+    display: none;
+  }
+
+  /* Hide all results by default */
+  .result-message {
+    display: none;
+  }
+
+  /* Computer choice fixed for demo: scissors */
+  /* Show computer choice text */
+  #rock:checked ~ .computer-choice::after {
+    content: "Computer chose Scissors";
+  }
+  #paper:checked ~ .computer-choice::after {
+    content: "Computer chose Rock";
+  }
+  #scissors:checked ~ .computer-choice::after {
+    content: "Computer chose Paper";
+  }
+
+  /* Determine win/lose/draw based on user and computer choice */
+  /* User rock vs computer scissors -> win */
+  #rock:checked ~ .result-container #result-rock .win {
+    display: inline;
+  }
+  #rock:checked ~ .result-container #result-rock .lose,
+  #rock:checked ~ .result-container #result-rock .draw {
+    display: none;
+  }
+  /* User paper vs computer rock -> win */
+  #paper:checked ~ .result-container #result-paper .win {
+    display: inline;
+  }
+  #paper:checked ~ .result-container #result-paper .lose,
+  #paper:checked ~ .result-container #result-paper .draw {
+    display: none;
+  }
+  /* User scissors vs computer paper -> win */
+  #scissors:checked ~ .result-container #result-scissors .win {
+    display: inline;
+  }
+  #scissors:checked ~ .result-container #result-scissors .lose,
+  #scissors:checked ~ .result-container #result-scissors .draw {
+    display: none;
+  }
+
+</style>
+</head>
+<body>
+  <h1>Rock Paper Scissors - CSS Only</h1>
+  <div class="game">
+    <form>
+      <div class="choices">
+        <input type="radio" id="rock" name="choice" />
+        <label for="rock">Rock</label>
+
+        <input type="radio" id="paper" name="choice" />
+        <label for="paper">Paper</label>
+
+        <input type="radio" id="scissors" name="choice" />
+        <label for="scissors">Scissors</label>
+      </div>
+    </form>
+    <div class="computer-choice"></div>
+    <div class="result-container">
+      <div id="result-rock" class="result-message result">
+        You chose Rock. <span class="win">You Win!</span><span class="lose">You Lose!</span><span class="draw">It's a Draw!</span>
+      </div>
+      <div id="result-paper" class="result-message result">
+        You chose Paper. <span class="win">You Win!</span><span class="lose">You Lose!</span><span class="draw">It's a Draw!</span>
+      </div>
+      <div id="result-scissors" class="result-message result">
+        You chose Scissors. <span class="win">You Win!</span><span class="lose">You Lose!</span><span class="draw">It's a Draw!</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
